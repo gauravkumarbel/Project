@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Savory Bistro | Fine Dining</title>
+    <style>
+        :root {
+            --primary: #c5a880;
+            --dark: #1a1a1a;
+            --light: #f9f9f9;
+            --text: #333333;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: var(--text); background: var(--light); scroll-behavior: smooth; }
+        
+        /* Navigation */
+        nav { background: var(--dark); padding: 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: var(--primary); font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { color: #fff; text-decoration: none; font-size: 16px; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://unsplash.com') no-repeat center center/cover; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px; }
+        .hero h1 { font-size: 48px; margin-bottom: 10px; letter-spacing: 2px; }
+        .hero p { font-size: 20px; margin-bottom: 30px; max-width: 600px; }
+        .btn { background: var(--primary); color: var(--dark); padding: 12px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; transition: transform 0.3s, background 0.3s; }
+        .btn:hover { background: #b3956b; transform: scale(1.05); }
+
+        /* Container & Structure */
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        h2 { font-size: 36px; margin-bottom: 40px; position: relative; padding-bottom: 10px; color: var(--dark); }
+        h2::after { content: ''; width: 60px; height: 3px; background: var(--primary); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+
+        /* Menu Section */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1-fr)); gap: 30px; margin-top: 20px; }
+        .menu-item { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left; }
+        .menu-item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-bottom: 10px; color: var(--dark); }
+        .menu-item-price { color: var(--primary); }
+        .menu-item p { color: #666; font-size: 14px; line-height: 1.5; }
+
+        /* About Section */
+        .about { background: #fdfaf6; max-width: 100%; }
+        .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 18px; }
+
+        /* Contact Section */
+        .contact-info { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px; margin-top: 20px; font-size: 16px; }
+        .contact-box { background: white; padding: 30px; border-radius: 8px; flex: 1; min-width: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .contact-box h3 { margin-bottom: 15px; color: var(--primary); }
+
+        /* Footer */
+        footer { background: var(--dark); color: #888; padding: 20px; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SAVORY BISTRO</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#contact">Find Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <h1>Experience Fine Craftsmanship</h1>
+        <p>Locally sourced ingredients turned into modern culinary masterpieces.</p>
+        <a href="#contact" class="btn">Book a Table</a>
+    </div>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2>Chef's Specialties</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span>Pan-Seared Salmon</span>
+                    <span class="menu-item-price">$28</span>
+                </div>
+                <p>Wild-caught salmon served over a bed of wild rice, asparagus, and citrus herb glaze.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span>Truffle Ribeye Steak</span>
+                    <span class="menu-item-price">$42</span>
+                </div>
+                <p>Prime aged ribeye steak drizzled with black truffle oil, served with garlic mashed potatoes.</p>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-header">
+                    <span>Artisanal Burrata Bowl</span>
+                    <span class="menu-item-price">$16</span>
+                </div>
+                <p>Creamy burrata cheese, heirloom cherry tomatoes, basil pesto, and aged balsamic reduction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>Our Story</h2>
+        <div class="about-content">
+            <p>Founded with a passion for unforgettable hospitality, Savory Bistro bridges the gap between classic technique and progressive design. We work hand-in-hand with local farmers and artisans to ensure every element on your plate is vibrant, fresh, and intentionally prepared.</p>
+        </div>
+    </section>
+
+    <!-- Contact & Hours Section -->
+    <section id="contact">
+        <h2>Hours & Location</h2>
+        <div class="contact-info">
+            <div class="contact-box">
+                <h3>Opening Hours</h3>
+                <p>Mon - Thu: 4:00 PM - 10:00 PM</p>
+                <p>Fri - Sat: 4:00 PM - 11:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="contact-box">
+                <h3>Our Location</h3>
+                <p>123 Culinary Boulevard</p>
+                <p>Gourmet District, NY 10001</p>
+                <p>Phone: (555) 019-2834</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Savory Bistro. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
