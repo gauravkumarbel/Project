@@ -16,8 +16,14 @@ pipeline {
         }
 
         stage('Docker Build') {
-            steps {
-                sh 'docker build -t devops-website:latest .'
+    steps {
+        sh 'docker --version'
+        sh 'pwd'
+        sh 'ls -la'
+        sh 'docker build -t devops-website:latest .'
+    }
+}
+
             }
         }
     }
