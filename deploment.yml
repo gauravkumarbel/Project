@@ -1,19 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
-  name: devops-website
+  name: my-web
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
-      app: devops-website
+      app: my-web
+
   template:
     metadata:
       labels:
-        app: devops-website
+        app: my-web
+
     spec:
       containers:
-        - name: website
-          image: devops-website:latest
+        - name: my-web
+          image: gaurav75/my-web:latest
+
           ports:
             - containerPort: 80
