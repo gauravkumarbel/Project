@@ -351,9 +351,70 @@ renderLectures();
     measurementId: "G-XR5ZN58QK1"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Signup
+    window.signup = function() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Account created! Ab login karo."))
+        .catch(err => alert("Error: " + err.message));
+    }
+
+    // Login
+    window.login = function() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Login successful!"))
+        .catch(err => alert("Error: " + err.message));
+    }
+
+    // Logout
+    window.logout = function() {
+      signOut(auth);
+    }
+
+    // Login state check (auto detect - refresh pe bhi kaam karega)
+    onAuthStateChanged(auth, (user) => {
+      const status = document.getElementById("status");
+      if (user) {
+        status.innerText = "Logged in as: " + user.email;
+      } else {
+        status.innerText = "Not logged in";
+      }
+    });
+
+    // Data save (sirf logged-in user)
+    window.saveData = async function() {
+      if (!auth.currentUser) {
+        alert("Pehle login karo!");
+        return;
+      }
+      const name = document.getElementById("nameInput").value;
+      await addDoc(collection(db, "users"), { 
+        name: name, 
+        userEmail: auth.currentUser.email,
+        time: new Date() 
+      });
+      alert("Data saved!");
+      loadData();
+    }
+
+    // Data load
+    window.loadData = async function() {
+      const snapshot = await getDocs(collection(db, "users"));
+      let html = "";
+      snapshot.forEach(doc => {
+        html += `<p>${doc.data().name} (${doc.data().userEmail})</p>`;
+      });
+      document.getElementById("output").innerHTML = html;
+    }
+
+    loadData();
 </script>
 </body>
 </html>
