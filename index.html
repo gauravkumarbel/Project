@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,3 +140,198 @@ footer{background:var(--bg2);border-top:1px solid var(--border);text-align:cente
  <line x1="120" y1="90" x2="165" y2="140" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
  <line x1="300" y1="100" x2="260" y2="140" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
  <line x1="120" y1="270" x2="165" y2="225" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+ <line x1="305" y1="270" x2="260" y2="225" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+</svg>
+</div>
+</section>
+
+<section id="tools">
+<div class="wrap">
+<h2 class="sec">DevOps Course Tools</h2>
+<p class="subtitle">Everything you need to become a job-ready DevOps Engineer</p>
+<div class="grid" id="toolsGrid"></div>
+</div>
+</section>
+
+<section id="lectures" style="background:var(--bg2);">
+<div class="wrap">
+<h2 class="sec">Daily Class Lectures</h2>
+<p class="subtitle">Upload today's class notes / recordings — saved automatically for students to access anytime</p>
+<div class="panel">
+<div class="row">
+  <div class="field"><label>Subject</label><select id="subjSelect"></select></div>
+  <div class="field"><label>Lecture Title</label><input type="text" id="lecTitle" placeholder="e.g. Day 5 - Docker Networking"></div>
+</div>
+<div class="row">
+  <div class="field"><label>Upload File (PDF / Video / Notes)</label><input type="file" id="lecFile"></div>
+  <div style="align-self:flex-end;"><button class="btn solid" onclick="uploadLecture()">⬆ Upload Lecture</button></div>
+</div>
+<div class="row">
+  <div class="field"><label>Filter by Subject</label><select id="filterSelect" onchange="renderLectures()"></select></div>
+</div>
+<div class="lecList" id="lecList"></div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap about-grid">
+<div>
+<div class="avatar">GK</div>
+<h2 style="margin:0 0 6px;">Gaurav Kumar</h2>
+<p style="color:var(--muted);margin:0 0 14px;">Founder & Lead DevOps Instructor, IT CAREER</p>
+<p style="color:var(--muted);">IT CAREER trains students in real-world DevOps engineering — Python, Linux, Git/GitHub, Docker, Kubernetes, Jenkins, AWS, Azure, Terraform and Monitoring — with daily hands-on lectures and a dedicated lecture library for every subject.</p>
+</div>
+<div class="panel">
+<h3 style="margin-top:0;">Why IT CAREER?</h3>
+<ul style="color:var(--muted);line-height:1.9;padding-left:20px;margin:0;">
+<li>10-in-1 DevOps toolchain, taught end to end</li>
+<li>Daily uploaded class lectures & notes</li>
+<li>Hands-on labs: Docker, Kubernetes, Jenkins, Terraform</li>
+<li>Cloud focus: AWS & Azure</li>
+<li>Direct mentorship from an industry instructor</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="contact" style="background:var(--bg2);">
+<div class="wrap contact-grid">
+<div>
+<h2 class="sec" style="text-align:left;">Contact Us</h2>
+<div class="info-item"><div class="icwrap">👤</div><div><b>Gaurav Kumar</b><br><span style="color:var(--muted);">Founder & Instructor</span></div></div>
+<div class="info-item"><div class="icwrap">📞</div><div>7505638266</div></div>
+<div class="info-item"><div class="icwrap">✉️</div><div>gauravkumar@gmail.com</div></div>
+<div class="info-item"><div class="icwrap">📍</div><div>Ghaziabad, Delhi (NCR)<br>Pincode: 201005</div></div>
+<div class="info-item"><div class="icwrap">🔗</div><div><a href="https://replit.com/@gauravkumardeal/IT-Career-DevOps-Academy" target="_blank" style="color:var(--accent);font-weight:600;">Project Page →</a></div></div>
+</div>
+<div class="panel">
+<h3 style="margin-top:0;">Send a Message</h3>
+<div class="row"><div class="field"><label>Your Name</label><input type="text" id="cName"></div></div>
+<div class="row"><div class="field"><label>Email</label><input type="email" id="cEmail"></div></div>
+<div class="row"><div class="field"><label>Message</label><textarea id="cMsg" rows="3"></textarea></div></div>
+<button class="btn solid" onclick="sendMessage()">Send Message</button>
+</div>
+</div>
+</section>
+
+<footer>
+© 2026 IT CAREER — DevOps Engineer Course · Gaurav Kumar · Ghaziabad, Delhi 201005
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TOOLS=[
+ {n:"Python",i:"🐍",d:"Scripting & automation fundamentals for DevOps pipelines."},
+ {n:"Networking",i:"🌐",d:"Core networking concepts every engineer must know."},
+ {n:"Linux",i:"🐧",d:"Shell, administration, and server management."},
+ {n:"Git & GitHub",i:"🔧",d:"Version control and collaborative workflows."},
+ {n:"Docker",i:"🐳",d:"Containerization of applications and services."},
+ {n:"Kubernetes",i:"☸️",d:"Orchestration and scaling of containers."},
+ {n:"Jenkins",i:"🔨",d:"CI/CD pipelines and build automation."},
+ {n:"Cloud: AWS & Azure",i:"☁️",d:"Deploying and managing cloud infrastructure."},
+ {n:"Terraform",i:"🏗️",d:"Infrastructure as Code for repeatable deployments."},
+ {n:"Monitoring",i:"📊",d:"Logging, alerting & observability tools."},
+];
+document.getElementById('toolsGrid').innerHTML = TOOLS.map(t=>`
+ <div class="card"><div class="icwrap">${t.i}</div><h3>${t.n}</h3><p>${t.d}</p><span class="tag">Module</span></div>
+`).join('');
+
+const subjOpts = TOOLS.map(t=>t.n);
+const subjSelect=document.getElementById('subjSelect');
+const filterSelect=document.getElementById('filterSelect');
+subjSelect.innerHTML = subjOpts.map(s=>`<option>${s}</option>`).join('');
+filterSelect.innerHTML = '<option value="All">All Subjects</option>' + subjOpts.map(s=>`<option>${s}</option>`).join('');
+
+const DB_KEY='itcareer_lectures_v1';
+function loadDB(){ try{ return JSON.parse(localStorage.getItem(DB_KEY)) || []; }catch(e){ return []; } }
+function saveDB(list){ try{ localStorage.setItem(DB_KEY, JSON.stringify(list)); return true; }catch(e){ showToast('Storage full — try a smaller file'); return false; } }
+
+function showToast(msg){
+ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+ setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function uploadLecture(){
+ const subject=subjSelect.value;
+ const title=document.getElementById('lecTitle').value.trim();
+ const fileInput=document.getElementById('lecFile');
+ const file=fileInput.files[0];
+ if(!title){ showToast('Please enter a lecture title'); return; }
+ if(!file){ showToast('Please choose a file'); return; }
+ const reader=new FileReader();
+ reader.onload=function(e){
+   const list=loadDB();
+   list.unshift({id:Date.now(), subject, title, filename:file.name, date:new Date().toLocaleDateString(), data:e.target.result});
+   if(saveDB(list)){
+     showToast('Lecture uploaded successfully');
+     document.getElementById('lecTitle').value='';
+     fileInput.value='';
+     renderLectures();
+   }
+ };
+ reader.onerror=function(){ showToast('Could not read file'); };
+ reader.readAsDataURL(file);
+}
+
+function renderLectures(){
+ const list=loadDB();
+ const filter=filterSelect.value;
+ const filtered = filter==='All' ? list : list.filter(l=>l.subject===filter);
+ const wrap=document.getElementById('lecList');
+ if(filtered.length===0){ wrap.innerHTML='<div class="empty">No lectures uploaded yet for this subject.</div>'; return; }
+ wrap.innerHTML = filtered.map(l=>`
+  <div class="lecItem">
+    <div><b>${l.title}</b><div class="meta">${l.subject} · ${l.filename} · ${l.date}</div></div>
+    <div style="display:flex;gap:8px;">
+      <a class="smallbtn" href="${l.data}" download="${l.filename}">Download</a>
+      <button class="smallbtn del" onclick="deleteLecture(${l.id})">Delete</button>
+    </div>
+  </div>
+ `).join('');
+}
+
+function deleteLecture(id){
+ let list=loadDB();
+ list=list.filter(l=>l.id!==id);
+ saveDB(list);
+ renderLectures();
+ showToast('Lecture removed');
+}
+
+function sendMessage(){
+ const name=document.getElementById('cName').value.trim();
+ const email=document.getElementById('cEmail').value.trim();
+ const msg=document.getElementById('cMsg').value.trim();
+ if(!name||!email||!msg){ showToast('Please fill all fields'); return; }
+ try{
+  const key='itcareer_messages_v1';
+  const list=JSON.parse(localStorage.getItem(key))||[];
+  list.unshift({name,email,msg,date:new Date().toLocaleString()});
+  localStorage.setItem(key, JSON.stringify(list));
+ }catch(e){}
+ document.getElementById('cName').value='';
+ document.getElementById('cEmail').value='';
+ document.getElementById('cMsg').value='';
+ showToast('Message sent — we will contact you soon');
+}
+
+function toggleTheme(){
+ const root=document.documentElement;
+ const isDark = root.getAttribute('data-theme')==='dark';
+ root.setAttribute('data-theme', isDark ? 'light':'dark');
+ document.getElementById('themeBtn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
+ try{ localStorage.setItem('itcareer_theme', isDark?'light':'dark'); }catch(e){}
+}
+(function initTheme(){
+ let saved='light';
+ try{ saved = localStorage.getItem('itcareer_theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'); }catch(e){}
+ document.documentElement.setAttribute('data-theme', saved);
+ document.getElementById('themeBtn').textContent = saved==='dark' ? '☀️ Light' : '🌙 Dark';
+})();
+
+renderLectures();
+</script>
+</body>
+</html>
