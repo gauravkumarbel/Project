@@ -1,10 +1,10 @@
 FROM nginx:alpine
 
 # Purana default content hata do
-RUN rm -rf /usr/share/nginx/index.html/*
+RUN rm -rf /usr/share/index.html/*
 
 # Apni website copy karo
-COPY . /usr/share/nginx/index.html/
+COPY . /usr/share/index.html/
 
 # Optional custom nginx config
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
